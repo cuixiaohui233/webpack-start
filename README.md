@@ -1,43 +1,61 @@
-模块
+1.npm  install -g webpack
 
-css
+2.npm init 初始化项目，生成 pack.json 文件
 
-webpack提供两个工具处理样式表，css-loader 和 style-loader，二者处理的任务不同，css-loader使你能够使用类似@import 和 url(...)
+3.npm --save-dev -g webpack
 
-的方法实现require()的功能,style-loader将所有的计算后的样式加入页面中，二者组合在一起使你能够把样式表嵌入webpack打包后的JS文件
+4.新建文件夹结构如下：
 
-中。 更多文档点击介里 [https://github.com/css-modules/css-modules]
+    ·public -> index.html
 
-css 预处理器
+    ·app -> Greeter.js
 
-Sass he Less 之类的预处理器是对原生 css 的扩展，它们允许你使用类似于variables, nesting, mixins, inheritance等不存在于CSS中
+    ·app ->  main.js
 
-的特性来写CSS，CSS预处理器可以这些特殊类型的语句转化为浏览器可识别的CSS语句，
+5.在 index.html 中写入最基础的 html 代码，以便引入打包后的代码
 
-你现在可能都已经熟悉了，在webpack里使用相关loaders进行配置就可以使用了，以下是常用的CSS 处理loaders:
+6.编写 webpack.config.js 文件：
 
-  Less Loader
+        module.exports = {
+            entry: __dirname + "/app/main.js",// 唯一入口
+            output: {
+                path: __dirname + "/public",// 打包后存放文件的地方
+                filename: "bundle.js"// 打包后文件输出的文件名
+            }
+        }
 
-  Sass Loader
+7.在 pack.json 中修改文件来更快捷的执行打包任务（这一块不是特别明白，好像怎么写的都有，教程和公司代码不一样）
 
-  Stylus Loader
+        {
+          "name": "webpack-sample-project",
+          "version": "1.0.0",
+          "description": "Sample webpack project",
+          "scripts": {
+            "start": "webpack" // 修改的是这里，JSON文件不支持注释，引用时请清除
+          },
+          "author": "zhang",
+          "license": "ISC",
+          "devDependencies": {
+            "webpack": "3.10.0"
+          }
+        }
 
-不过其实也存在一个CSS的处理平台-PostCSS，它可以帮助你的CSS实现更多的功能，在其官方文档可了解更多相关知识。
+8.生成 Source Maps 便于调试
 
-举例来说如何使用PostCSS，我们使用PostCSS来为CSS代码自动添加适应不同浏览器的CSS前缀。
+需要配置 devtool,有好几种，就写对中小型的项目的吧，ecal-source-map:
 
-插件
+修改 webpack.config.js文件：
 
-插件（Plugins）是用来拓展Webpack功能的，它们会在整个构建过程中生效，执行相关的任务。
+        module.exports = {
+            devtool:'eval-source-map',
+            entry: ....,
+            output: ...
+        }
 
-Loaders和Plugins常常被弄混，但是他们其实是完全不同的东西，可以这么来说，loaders是在打包构建过程中用来处理源文件的（JSX，Scss，
+9.使用webpack构建本地服务器
 
-Less..），一次处理一个，插件并不直接操作单个文件，它直接对整个构建过程其作用。
+npm install --save-dev webpack-dev-server
 
-Webpack有很多内置插件，同时也有很多第三方插件，可以让我们完成更加丰富的功能。
+先写到这里吧
 
-使用插件的方法
 
-要使用某个插件，我们需要通过npm安装它，然后要做的就是在webpack配置中的plugins关键字部分添加该插件的一个实例（plugins是一个数组
-
-）继续上面的例子，我们添加了一个给打包后代码添加版权声明的插件。[https://webpack.js.org/plugins/banner-plugin/]
