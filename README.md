@@ -58,4 +58,13 @@ npm install --save-dev webpack-dev-server
 
 先写到这里吧
 
+|---|---|
+|devserver的配置选项|功能配置|
+|contentBase|默认webpack-dev-server会为根文件夹提供本地服务器，如果想为另外一个目录下的文件提供本地服务器，应该在这里设置其所在目录（本例设置到“public"目录）|
+|port|设置默认监听端口，如果省略，默认为“8080”|
+|inline|设置为 true，当源文件改变是会自动刷新页面|
+|historyApiFallback|在单页面开发时非常有用，依赖于HTML5 history API,如果设置为true,所有的跳转都指向index.html|
+
+10.
+
 
