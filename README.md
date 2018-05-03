@@ -65,6 +65,39 @@ npm install --save-dev webpack-dev-server
 |inline|设置为 true，当源文件改变是会自动刷新页面|
 |historyApiFallback|在单页面开发时非常有用，依赖于HTML5 history API,如果设置为true,所有的跳转都指向index.html|
 
-10.
+在webpack.config.js 中添加配置：
+
+        module.export = {
+            devtool: 'eval-source-map',
+
+            entry: __dirname + "/app/main.js",
+            output:{
+                 __dirname + "/public",
+                 filename: "bundle.js"
+            },
+
+            devServer: {
+                 contentBase: "./public",// 本地服务器加载时所载的目录
+                 historyApiFallback: true,// 不跳转
+                 inline: true// 实时更新
+            }
+        }
+
+        云里雾去的，关于这块
+
+        还有 package.json 中的 scripts 对象中添加如下命令，用以开启本地服务：
+
+        "scripts": {
+            "server":"webpack-dev-server --open"
+        }
+
+        然后，就可以在终端 npm run server ，在本地的8080端口查看结果
+10.Loaders
+
+Loaders 据教程说时 webpack 最激动人心的功能之一，呃呃...各种转换，scss 转换为 css,或者把 ES5 语法转换为 ES6 语法，再或者将
+
+jsx 转化为 js 等等,
+
+关于Loaders,需要单独安装，并且需要在webpack.config.js文件中的modules关键字下进行配置，明天再写，
 
 
