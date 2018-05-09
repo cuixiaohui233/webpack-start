@@ -7,7 +7,7 @@ class Greeter extends Component{
     render() {
         return (
             <div className="root">
-                    {config.greetText}
+                <div></div>
             </div>
         );
     }
