@@ -103,5 +103,47 @@ jsx 转化为 js 等等,
 
 发现自己每天更新的。。。一言难尽... 
 
+### 关于webpack配置的几种形式:(捡重要的记录一下
 
+const path = require('path');
+
+moudle.export = {
+    // mode 
+    mode: "production"// 生产环境
+    // mode: "development"// 开发环境
+    // mode: "none" // no default
+    
+    // entry 入口文件
+    entry: ["./app/entry1","./app/entry2"],
+    //entery: {
+        a:"./app/entry-a",
+        b:["./app/entry-b1","./app/entry-b2"]
+    }
+    
+    // output 出口文件
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        // 所有输出的文件的目标路径必须是绝对路径（使用node 的path模块 可以搞定）
+       filename: "bundle.js",
+       // filename: "[name].js",//  用于有多个入口
+       // filename: "[]"// 用于长效缓存
+    }
+    
+    // module 模块 
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                include: [
+                    path.resilve(__dirname, "app")
+                ],
+                exclude: [
+                    path.resolve(__dirname, "app")
+                ]
+            }
+        ]
+    }
+}
+
+看特么一百遍我也不会配
 
